@@ -1,0 +1,6 @@
+# SecureVoiceChat - P2P Encrypted Voice Messaging System
+# Requirements file for dependencies
+
+cryptography>=41.0.0
+pyaudio>=0.2.14
+pycryptodome>=3.19.0
