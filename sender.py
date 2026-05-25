@@ -109,7 +109,7 @@ class VoiceSender:
         print(f"[SENDER] Connecting to {self.host}:{self.port}...")
         
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.socket.settimeout(30)  # 30 seconds timeout
+        self.socket.settimeout(30)  # Timeout 30 giây
         
         try:
             self.socket.connect((self.host, self.port))
@@ -275,7 +275,7 @@ class VoiceSender:
             raise Exception("Not connected")
         
         data = encode_message(message)
-        # Prepend length as 4-byte header
+        # Gắn thêm độ dài thành header 4 bytes
         length = len(data)
         header = length.to_bytes(4, byteorder='big')
         
@@ -294,11 +294,11 @@ class VoiceSender:
         if not self.socket:
             raise Exception("Not connected")
         
-        # Read 4-byte length header
+        # Đọc header độ dài 4 bytes
         header = self._recv_exact(4)
         length = int.from_bytes(header, byteorder='big')
         
-        # Read message data
+        # Đọc dữ liệu message
         data = self._recv_exact(length)
         return decode_message(data)
     

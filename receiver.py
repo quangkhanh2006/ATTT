@@ -283,7 +283,7 @@ class VoiceReceiver:
             raise Exception("Not connected")
         
         data = encode_message(message)
-        # Prepend length as 4-byte header
+        # Gắn thêm độ dài thành header 4 bytes
         length = len(data)
         header = length.to_bytes(4, byteorder='big')
         
@@ -302,11 +302,11 @@ class VoiceReceiver:
         if not self.client_socket:
             raise Exception("Not connected")
         
-        # Read 4-byte length header
+        # Đọc header độ dài 4 bytes
         header = self._recv_exact(4)
         length = int.from_bytes(header, byteorder='big')
         
-        # Read message data
+        # Đọc dữ liệu message
         data = self._recv_exact(length)
         return decode_message(data)
     
